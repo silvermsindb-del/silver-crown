@@ -39,17 +39,20 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000',
   cors: [
     'http://localhost:5173',
     'http://localhost:3000',
     'http://localhost:3001',
-    ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').map((url) => url.trim()), // Support multiple comma-separated URLs
+    'https://silver-crown-git-main-silvers-projects-e5cb6465.vercel.app',
+    ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').filter(Boolean).map((url) => url.trim().replace(/\/$/, '')), // Support multiple comma-separated URLs, and strip trailing slashes
   ],
   csrf: [
     'http://localhost:5173',
     'http://localhost:3000',
     'http://localhost:3001',
-    ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').map((url) => url.trim()), // Support multiple comma-separated URLs
+    'https://silver-crown-git-main-silvers-projects-e5cb6465.vercel.app',
+    ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').filter(Boolean).map((url) => url.trim().replace(/\/$/, '')), // Support multiple comma-separated URLs, and strip trailing slashes
   ],
   sharp,
   plugins: [
