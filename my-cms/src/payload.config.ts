@@ -43,13 +43,13 @@ export default buildConfig({
     'http://localhost:5173',
     'http://localhost:3000',
     'http://localhost:3001',
-    process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '', // Production Frontend URL
+    ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').map((url) => url.trim()), // Support multiple comma-separated URLs
   ],
   csrf: [
     'http://localhost:5173',
     'http://localhost:3000',
     'http://localhost:3001',
-    process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '', // Production Frontend URL
+    ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').map((url) => url.trim()), // Support multiple comma-separated URLs
   ],
   sharp,
   plugins: [
