@@ -45,6 +45,7 @@ export default buildConfig({
     'http://localhost:3000',
     'http://localhost:3001',
     'https://silver-crown-git-main-silvers-projects-e5cb6465.vercel.app',
+    'https://silver-crown-i2vylc686-silvers-projects-e5cb6465.vercel.app',
     ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').filter(Boolean).map((url) => url.trim().replace(/\/$/, '')), // Support multiple comma-separated URLs, and strip trailing slashes
   ],
   csrf: [
@@ -52,6 +53,7 @@ export default buildConfig({
     'http://localhost:3000',
     'http://localhost:3001',
     'https://silver-crown-git-main-silvers-projects-e5cb6465.vercel.app',
+    'https://silver-crown-i2vylc686-silvers-projects-e5cb6465.vercel.app',
     ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').filter(Boolean).map((url) => url.trim().replace(/\/$/, '')), // Support multiple comma-separated URLs, and strip trailing slashes
   ],
   sharp,
