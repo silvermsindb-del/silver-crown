@@ -1,12 +1,13 @@
 services:
-  # Backend (Payload CMS)
   - type: web
     name: my-cms
     env: node
-    root: my-cms
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    repo: https://github.com/silvermsindb-del/silver-crown.git
     branch: main
+    rootDir: my-cms
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    plan: free
     envVars:
       - key: DATABASE_URI
         sync: false
@@ -25,12 +26,12 @@ services:
           property: url
 
 staticSites:
-  # Frontend (Vite React)
   - name: jewelry-store
-    root: jewelry-store
+    repo: https://github.com/silvermsindb-del/silver-crown.git
+    branch: main
+    rootDir: jewelry-store
     buildCommand: npm install && npm run build
     publishDir: dist
-    branch: main
     envVars:
       - key: VITE_API_URL
         fromService:
