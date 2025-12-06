@@ -26,18 +26,16 @@ services:
           property: url
       - key: PAYLOAD_PUBLIC_FRONTEND_URL
         fromService:
-          type: static
+          type: static      # This references the static site
           name: jewelry-store
           property: url
 
+staticSites:
   # Frontend (Vite React)
-  - type: static
-    name: jewelry-store
-    env: static
+  - name: jewelry-store
     root: jewelry-store
     buildCommand: npm install && npm run build
     publishDir: dist
-    plan: free
     branch: main
     envVars:
       - key: VITE_API_URL
