@@ -34,7 +34,4 @@ staticSites:
     publishDir: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: my-cms
-          property: url
+        value: https://silver-crown-backend.onrender.com
