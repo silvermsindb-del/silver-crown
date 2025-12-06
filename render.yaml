@@ -1,0 +1,47 @@
+services:
+  # Backend (Payload CMS)
+  - type: web
+    name: my-cms
+    env: node
+    root: my-cms
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    plan: free
+    branch: main
+    envVars:
+      - key: DATABASE_URI
+        sync: false
+      - key: PAYLOAD_SECRET
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: PAYLOAD_PUBLIC_SERVER_URL
+        fromService:
+          type: web
+          name: my-cms
+          property: url
+      - key: PAYLOAD_PUBLIC_FRONTEND_URL
+        fromService:
+          type: static
+          name: jewelry-store
+          property: url
+
+  # Frontend (Vite React)
+  - type: static
+    name: jewelry-store
+    env: static
+    root: jewelry-store
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    plan: free
+    branch: main
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: my-cms
+          property: url
