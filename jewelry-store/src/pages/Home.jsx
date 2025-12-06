@@ -174,7 +174,7 @@ const Home = () => {
         queryKey: ['categories'],
         queryFn: async () => {
             // Quick inline fetch or import service. Assuming service exists.
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/categories?limit=10`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories?limit=10`);
             const data = await res.json();
             return data.docs;
         }

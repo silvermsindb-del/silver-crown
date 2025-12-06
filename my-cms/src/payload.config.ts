@@ -45,6 +45,12 @@ export default buildConfig({
     'http://localhost:3001',
     process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '', // Production Frontend URL
   ],
+  csrf: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '', // Production Frontend URL
+  ],
   sharp,
   plugins: [
     cloudinaryStorage({
