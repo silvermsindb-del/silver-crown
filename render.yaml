@@ -6,7 +6,6 @@ services:
     root: my-cms
     buildCommand: npm install && npm run build
     startCommand: npm start
-    plan: free
     branch: main
     envVars:
       - key: DATABASE_URI
@@ -24,8 +23,6 @@ services:
           type: web
           name: my-cms
           property: url
-      # - key: PAYLOAD_PUBLIC_FRONTEND_URL
-      #   sync: false # Set this manually in Render Dashboard after Frontend deploy
 
 staticSites:
   # Frontend (Vite React)
