@@ -24,11 +24,8 @@ services:
           type: web
           name: my-cms
           property: url
-      - key: PAYLOAD_PUBLIC_FRONTEND_URL
-        fromService:
-          type: static      # This references the static site
-          name: jewelry-store
-          property: url
+      # - key: PAYLOAD_PUBLIC_FRONTEND_URL
+      #   sync: false # Set this manually in Render Dashboard after Frontend deploy
 
 staticSites:
   # Frontend (Vite React)
