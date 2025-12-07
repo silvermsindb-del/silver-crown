@@ -7,6 +7,7 @@ export const Users: CollectionConfig = {
   },
   access: {
     create: () => true, // Public registration
+    admin: ({ req: { user } }) => user?.role === 'admin', // Only admins can access the admin panel
   },
   auth: {
     cookies: {
