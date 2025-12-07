@@ -12,7 +12,7 @@ const Footer = () => {
                         <img src="/logo.png" alt="Silver Crown Creation" className="h-16 w-auto brightness-0 invert" />
                     </Link>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                        Crafting timeless elegance for the modern soul. Every piece tells a story of passion and artistry.
+                        Building No./Flat No.: R. No. 6/1 Andheri Kurla Road Behind NandJyot Industrial Estate Saki Naka Mumbai Mumbai Maharashtra PIN Code: 400072
                     </p>
                     <div className="flex space-x-4">
                         <a href="#" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">

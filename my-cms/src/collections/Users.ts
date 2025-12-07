@@ -5,9 +5,18 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  auth: true,
   access: {
     create: () => true, // Public registration
+  },
+  auth: {
+    cookies: {
+      secure: true,
+      sameSite: 'None',
+      domain: undefined, // Let the browser handle the domain
+    },
+    tokenExpiration: 60 * 60 * 24 * 7, // 7 days
+    maxLoginAttempts: 5,
+    lockTime: 600 * 1000, // 10 minutes
   },
   fields: [
     {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { loginUser, getMe, registerUser } from '@/services/auth';
+import { loginUser, getMe, registerUser, logoutUser } from '@/services/auth';
 
 const AuthContext = createContext();
 
@@ -7,27 +7,26 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem('token'));
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        if (token) {
-            getMe()
-                .then(res => setUser(res.user))
-                .catch(() => {
-                    logout();
-                })
-                .finally(() => setLoading(false));
-        } else {
+    const checkUser = async () => {
+        try {
+            const res = await getMe();
+            setUser(res.user);
+        } catch (error) {
+            setUser(null);
+        } finally {
             setLoading(false);
         }
-    }, [token]);
+    };
+
+    useEffect(() => {
+        checkUser();
+    }, []);
 
     const login = async (email, password) => {
         const data = await loginUser(email, password);
-        if (data.token) {
-            localStorage.setItem('token', data.token);
-            setToken(data.token);
+        if (data.user) {
             setUser(data.user);
         }
         return data;
@@ -35,21 +34,25 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (email, password, name) => {
         const data = await registerUser({ email, password, name, role: 'user' });
-        // Auto login after register? Or just return data?
-        // Usually good to auto login or let them login. 
-        // For now, let's just return and let the component redirect.
+        // After register, we might want to auto-login or redirect.
+        // If the backend logs them in on register (returns cookie), we can setUser.
+        if (data.user) {
+            setUser(data.user);
+        }
         return data;
     };
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        setToken(null);
+    const logout = async () => {
+        try {
+            await logoutUser();
+        } catch (e) {
+            console.error("Logout failed", e);
+        }
         setUser(null);
-        setLoading(false); // Ensure loading is false after logout
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, login, register, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );
