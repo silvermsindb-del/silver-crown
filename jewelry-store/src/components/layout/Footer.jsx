@@ -11,21 +11,25 @@ const Footer = () => {
                     <Link to="/" className="block">
                         <img src="/logo.png" alt="Silver Crown Creation" className="h-16 w-auto brightness-0 invert" />
                     </Link>
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                        Building No./Flat No.: R. No. 6/1 Andheri Kurla Road Behind NandJyot Industrial Estate Saki Naka Mumbai Mumbai Maharashtra PIN Code: 400072
-                    </p>
+                    <div className="text-gray-400 text-sm leading-relaxed space-y-2">
+                        <p>
+                            Building No./Flat No.: R. No. 6/1 Andheri Kurla Road <br />
+                            Behind NandJyot Industrial Estate Saki Naka <br />
+                            Mumbai Maharashtra PIN Code: 400072
+                        </p>
+                        <p>Phone: +91 81089 42307</p>
+                        <p>Email: silvercrowncreation016@gmail.com</p>
+                        <p>
+                            Working Hours: <br />
+                            Monday – Saturday: 08AM – 10PM
+                        </p>
+                    </div>
                     <div className="flex space-x-4">
-                        <a href="#" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">
-                            <Facebook size={18} />
-                        </a>
-                        <a href="#" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">
-                            <Instagram size={18} />
-                        </a>
-                        <a href="#" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">
-                            <Twitter size={18} />
-                        </a>
-                        <a href="#" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">
+                        <a href="https://www.youtube.com/@silvercrowncreation" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">
                             <Youtube size={18} />
+                        </a>
+                        <a href="https://www.instagram.com/silvercrowncreation?utm_source=qr&igsh=MThxbnY3YTB0dThnZQ==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-stone-900 transition-colors">
+                            <Instagram size={18} />
                         </a>
                     </div>
                 </div>

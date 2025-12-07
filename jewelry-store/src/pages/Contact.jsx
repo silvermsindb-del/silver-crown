@@ -49,7 +49,13 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <p className="font-bold text-gray-900 text-sm mb-1 uppercase tracking-wider">Visit Us</p>
-                                    <p className="text-sm leading-relaxed">123 Jewelry Lane, Fashion District<br />Mumbai, MH 400001</p>
+                                    <a>
+                                        <p className="text-sm leading-relaxed">
+                                        Building No./Flat No.: R. No. 6/1 Andheri Kurla Road<br />
+                                        Behind NandJyot Industrial Estate Saki Naka<br />
+                                        Mumbai Maharashtra PIN Code: 400072
+                                    </p>
+                                    </a>
                                 </div>
                             </div>
                             <div className="flex items-start space-x-4 group">
@@ -58,7 +64,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <p className="font-bold text-gray-900 text-sm mb-1 uppercase tracking-wider">Call Us</p>
-                                    <p className="text-sm">+91 98765 43210</p>
+                                    <a href="tel:+918108942307"><p className="text-sm">+91 81089 42307</p></a>
                                 </div>
                             </div>
                             <div className="flex items-start space-x-4 group">
@@ -67,7 +73,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <p className="font-bold text-gray-900 text-sm mb-1 uppercase tracking-wider">Email Us</p>
-                                    <p className="text-sm">info@silvercrowncreation.com</p>
+                                    <a href="mailto:silvercrowncreation016@gmail.com"><p className="text-sm">silvercrowncreation016@gmail.com</p></a>
                                 </div>
                             </div>
                         </div>

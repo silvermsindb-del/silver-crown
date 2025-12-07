@@ -1,6 +1,9 @@
 import React from 'react';
 import Image from '@/components/common/Image';
 
+import jewelry1 from '@/assets/jewelry-1.png';
+import jewelry2 from '@/assets/jewelry-2.png';
+
 const About = () => {
     return (
         <div className="bg-white min-h-screen pt-20">
@@ -33,10 +36,10 @@ const About = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="aspect-[3/4] bg-gray-100 mt-8 rounded overflow-hidden">
-                            <Image src="https://images.unsplash.com/photo-1573408301185-a1d31e857414?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Detail" />
+                            <Image src={jewelry1} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Diamond Necklace" />
                         </div>
                         <div className="aspect-[3/4] bg-gray-100 rounded overflow-hidden">
-                            <Image src="https://images.unsplash.com/photo-1617038224558-28ad3fb558a7?q=80&w=1887&auto=format&fit=crop" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Earrings" />
+                            <Image src={jewelry2} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Gold Rings" />
                         </div>
                     </div>
                 </div>
@@ -64,6 +67,44 @@ const About = () => {
                             <p className="text-gray-500 text-sm leading-relaxed">
                                 Your happiness is our reward. We strive to provide an exceptional shopping experience, from browsing to unboxing.
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* Visit Us Section */}
+            <div className="layout-container py-24 border-t border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div className="order-2 md:order-1 h-[500px] bg-gray-100 rounded overflow-hidden">
+                        <Image
+                            src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?q=80&w=2070&auto=format&fit=crop"
+                            alt="Our Showroom"
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                        />
+                    </div>
+                    <div className="order-1 md:order-2 space-y-8">
+                        <h2 className="text-3xl font-serif font-bold text-gray-900">Visit Our Showroom</h2>
+                        <div className="w-20 h-1 bg-primary"></div>
+                        <div className="space-y-4 text-gray-600 font-light text-lg">
+                            <p className="leading-relaxed">
+                                Experience the sparkle in person. Visit our Mumbai showroom to view our latest collections and consult with our jewelry experts.
+                            </p>
+                            <div className="pt-4 space-y-2">
+                                <p className="font-medium text-gray-900">Address</p>
+                                <p>
+                                    Building No./Flat No.: R. No. 6/1 Andheri Kurla Road<br />
+                                    Behind NandJyot Industrial Estate, Saki Naka<br />
+                                    Mumbai, Maharashtra 400072
+                                </p>
+                            </div>
+                            <div className="space-y-2">
+                                <p className="font-medium text-gray-900">Contact</p>
+                                <p>Phone: +91 81089 42307</p>
+                                <p>Email: silvercrowncreation016@gmail.com</p>
+                            </div>
+                            <div className="space-y-2">
+                                <p className="font-medium text-gray-900">Working Hours</p>
+                                <p>Monday – Saturday: 08:00 AM – 10:00 PM</p>
+                            </div>
                         </div>
                     </div>
                 </div>
