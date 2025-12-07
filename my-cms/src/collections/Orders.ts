@@ -7,8 +7,6 @@ export const Orders: CollectionConfig = {
         defaultColumns: ['id', 'user', 'total', 'status', 'createdAt'],
     },
     access: {
-        read: () => true, // DEBUG: Allow public access to debug "Order Not Found"
-        /*
         read: ({ req: { user } }) => {
             if (user?.role === 'admin') return true
             if (user) return {
@@ -18,7 +16,6 @@ export const Orders: CollectionConfig = {
             }
             return false
         },
-        */
         create: ({ req: { user } }) => !!user, // Only logged-in users can create orders
         update: ({ req: { user }, id }) => {
             if (user?.role === 'admin') return true;
