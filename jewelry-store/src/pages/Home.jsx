@@ -126,7 +126,7 @@ const HeroSlider = ({ banners }) => {
                                 {banner.buttonText && (
                                     <Link
                                         to={banner.buttonLink || '/shop'}
-                                        className="inline-block bg-white/90 backdrop-blur-sm text-stone-900 px-8 py-3 text-xs md:text-sm font-bold uppercase tracking-widest hover:bg-white transition-colors mt-4"
+                                        className="inline-block bg-white/90 backdrop-blur-sm text-stone-900 px-8 py-3 md:px-8 md:py-3 text-sm md:text-sm font-bold uppercase tracking-widest hover:bg-white transition-colors mt-4 shadow-sm"
                                     >
                                         {banner.buttonText}
                                     </Link>

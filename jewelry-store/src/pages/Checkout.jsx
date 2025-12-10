@@ -5,9 +5,9 @@ import { createOrder } from '@/services/orders';
 import { getShippingMethods } from '@/services/shipping';
 import { useNavigate, Link } from 'react-router-dom';
 import { formatCurrency } from '@/lib/utils';
-import { ShieldCheck, Truck, Package, Lock } from 'lucide-react';
+import { ShieldCheck, Truck, Package, Lock, Banknote } from 'lucide-react';
 import { motion } from 'framer-motion';
-import api from '@/lib/api'; // Import api to make authenticated requests to payment endpoints
+
 
 const Checkout = () => {
     const { cart, cartTotal, clearCart } = useCart();
@@ -46,79 +46,14 @@ const Checkout = () => {
         country: 'India',
         phone: '',
         email: user?.email || '',
-        paymentMethod: 'razorpay' // Default to Razorpay
+        paymentMethod: 'cod' // Default to COD
     });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleRazorpayPayment = async (orderId, amount) => {
-        try {
-            // 1. Create Razorpay Order from Backend
-            const { data: { id: razorpayOrderId, currency, amount: razorpayAmount } } = await api.post('/payments/create-order', {
-                orderId: orderId
-            });
 
-            // 2. Open Razorpay Checkout
-            const options = {
-                key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'test_key_id', // Add this to .env
-                amount: razorpayAmount,
-                currency: currency,
-                name: "Silver Crown Creation",
-                description: "Jewelry Purchase",
-                image: "/logo.png",
-                order_id: razorpayOrderId,
-                handler: async function (response) {
-                    try {
-                        setLoading(true);
-                        // 3. Verify Payment
-                        await api.post('/payments/verify', {
-                            razorpay_order_id: response.razorpay_order_id,
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_signature: response.razorpay_signature,
-                            orderId: orderId
-                        });
-
-                        // Success
-                        clearCart();
-                        setShowSuccessModal(true);
-                    } catch (verifyError) {
-                        console.error("Payment Verification Failed", verifyError);
-                        setError("Payment verification failed. Please contact support.");
-                    } finally {
-                        setLoading(false);
-                    }
-                },
-                prefill: {
-                    name: formData.fullName,
-                    email: formData.email,
-                    contact: formData.phone
-                },
-                theme: {
-                    color: "#000000" // Primary color
-                },
-                modal: {
-                    ondismiss: function () {
-                        setLoading(false);
-                        setError("Payment cancelled. You can retry.");
-                    }
-                }
-            };
-
-            const rzp1 = new window.Razorpay(options);
-            rzp1.on('payment.failed', function (response) {
-                setError("Payment failed: " + response.error.description);
-                setLoading(false);
-            });
-            rzp1.open();
-
-        } catch (err) {
-            console.error("Razorpay Init Error", err);
-            setError("Failed to initiate payment. Please try again.");
-            setLoading(false);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -167,20 +102,15 @@ const Checkout = () => {
                     country: formData.country,
                     phone: formData.phone
                 },
-                paymentMethod: 'razorpay' // Enforce Razorpay
+                paymentMethod: 'cod' // Enforce COD for now
             };
 
-            // 1. Create Order in Pending State
-            const order = await createOrder(orderPayload);
+            // 1. Create Order
+            await createOrder(orderPayload);
 
-            // 2. Initiate Payment (if method is Razorpay)
-            if (formData.paymentMethod === 'razorpay') {
-                await handleRazorpayPayment(order.id || order.doc.id, finalTotal);
-            } else {
-                // Should not happen based on current requirements
-                clearCart();
-                setShowSuccessModal(true);
-            }
+            // 2. Success (Directly for COD)
+            clearCart();
+            setShowSuccessModal(true);
 
         } catch (err) {
             console.error(err);
@@ -369,22 +299,19 @@ const Checkout = () => {
                                     <input
                                         type="radio"
                                         name="paymentMethod"
-                                        value="razorpay"
+                                        value="cod"
                                         checked={true}
                                         readOnly
                                         className="text-primary focus:ring-primary"
                                     />
                                     <div className="flex flex-col">
                                         <span className="font-bold flex items-center">
-                                            <Lock size={14} className="mr-2 text-green-600" />
-                                            UPI / NetBanking / Cards
+                                            <Banknote size={14} className="mr-2 text-green-600" />
+                                            Cash on Delivery / Pay on Request
                                         </span>
-                                        <span className="text-xs text-gray-500">Secure online payment via Razorpay</span>
+                                        <span className="text-xs text-gray-500">Pay securely when you receive your order.</span>
                                     </div>
                                 </label>
-                                <p className="text-xs text-gray-400 mt-2 px-1">
-                                    * Cash on Delivery is currently unavailable. All payments are securely processed online.
-                                </p>
                             </div>
                         </form>
                     </div>
@@ -433,7 +360,7 @@ const Checkout = () => {
                                 className="w-full bg-stone-900 text-white py-4 mt-8 uppercase tracking-widest font-bold hover:bg-secondary transition-colors disabled:opacity-70 flex justify-center items-center space-x-2"
                             >
                                 {loading && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
-                                <span>{loading ? 'Processing...' : 'Pay Now'}</span>
+                                <span>{loading ? 'Processing...' : 'Place Order'}</span>
                             </button>
 
                             <div className="mt-6 flex items-center justify-center text-gray-400 text-xs space-x-1">

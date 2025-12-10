@@ -178,7 +178,7 @@ const ProductDetails = () => {
             <div className="layout-container py-12 lg:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
                     {/* Image Gallery */}
-                    <div className="space-y-4 sticky top-24 h-fit">
+                    <div className="space-y-4 md:sticky top-24 h-fit">
                         <div className="aspect-[3/4] bg-gray-100 overflow-hidden relative group rounded-sm shadow-sm">
                             <motion.div
                                 key={selectedImageIndex}
