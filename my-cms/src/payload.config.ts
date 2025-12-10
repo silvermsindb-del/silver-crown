@@ -19,6 +19,8 @@ import { GlobalData } from './globals/GlobalData'
 
 import { ShippingMethods } from './collections/ShippingMethods'
 
+import { createRazorpayOrder, verifyRazorpayPayment } from './endpoints/payments'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -30,6 +32,18 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Categories, Products, Enquiries, Banners, Pages, Testimonials, Orders, ShippingMethods],
+  endpoints: [
+    {
+      path: '/payments/create-order',
+      method: 'post',
+      handler: createRazorpayOrder,
+    },
+    {
+      path: '/payments/verify',
+      method: 'post',
+      handler: verifyRazorpayPayment,
+    },
+  ],
   globals: [GlobalData],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -47,6 +61,7 @@ export default buildConfig({
     'https://silver-crown-silvers-projects-e5cb6465.vercel.app',
     'https://silver-crown-git-main-silvers-projects-e5cb6465.vercel.app',
     'https://silver-crown-i2vylc686-silvers-projects-e5cb6465.vercel.app',
+    'https://silver-crown-backend.onrender.com',
     ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').filter(Boolean).map((url) => url.trim().replace(/\/$/, '')), // Support multiple comma-separated URLs, and strip trailing slashes
   ],
   csrf: [
@@ -56,6 +71,7 @@ export default buildConfig({
     'https://silver-crown-silvers-projects-e5cb6465.vercel.app',
     'https://silver-crown-git-main-silvers-projects-e5cb6465.vercel.app',
     'https://silver-crown-i2vylc686-silvers-projects-e5cb6465.vercel.app',
+    'https://silver-crown-backend.onrender.com',
     ...(process.env.PAYLOAD_PUBLIC_FRONTEND_URL || '').split(',').filter(Boolean).map((url) => url.trim().replace(/\/$/, '')), // Support multiple comma-separated URLs, and strip trailing slashes
   ],
   sharp,

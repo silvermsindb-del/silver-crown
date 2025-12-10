@@ -455,7 +455,8 @@ export interface Order {
     country: string;
     phone: string;
   };
-  paymentMethod: 'credit_card' | 'paypal' | 'cod';
+  paymentMethod: 'razorpay' | 'credit_card' | 'paypal' | 'cod';
+  transactionId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -810,6 +811,7 @@ export interface OrdersSelect<T extends boolean = true> {
         phone?: T;
       };
   paymentMethod?: T;
+  transactionId?: T;
   updatedAt?: T;
   createdAt?: T;
 }

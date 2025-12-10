@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getBanners, getTestimonials, createTestimonial } from '@/services/content';
-import { getProducts } from '@/services/products';
+import { getProducts, getCategories } from '@/services/products';
 import { Link } from 'react-router-dom';
 import ProductCard from '@/components/product/ProductCard';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -169,15 +169,11 @@ const Home = () => {
         queryFn: () => getProducts({ limit: 8, 'where[isFeatured][equals]': true })
     });
 
+
     // Categories
-    const { data: categories } = useQuery({ // Importing getCategories directly here or assume it's available
+    const { data: categories } = useQuery({
         queryKey: ['categories'],
-        queryFn: async () => {
-            // Quick inline fetch or import service. Assuming service exists.
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories?limit=10`);
-            const data = await res.json();
-            return data.docs;
-        }
+        queryFn: () => getCategories({ limit: 10 })
     });
 
     const newArrivals = newArrivalsData?.docs || [];

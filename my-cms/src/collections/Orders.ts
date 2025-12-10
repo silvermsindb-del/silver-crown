@@ -135,11 +135,19 @@ export const Orders: CollectionConfig = {
             name: 'paymentMethod',
             type: 'select',
             options: [
+                { label: 'UPI / Netbanking (Razorpay)', value: 'razorpay' },
                 { label: 'Credit Card', value: 'credit_card' },
                 { label: 'PayPal', value: 'paypal' },
                 { label: 'Cash on Delivery', value: 'cod' },
             ],
             required: true,
+        },
+        {
+            name: 'transactionId',
+            type: 'text',
+            admin: {
+                readOnly: true,
+            }
         }
     ],
 }
