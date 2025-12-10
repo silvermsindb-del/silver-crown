@@ -455,7 +455,7 @@ export interface Order {
     country: string;
     phone: string;
   };
-  paymentMethod: 'razorpay' | 'credit_card' | 'paypal' | 'cod';
+  paymentMethod: 'credit_card' | 'paypal' | 'cod';
   transactionId?: string | null;
   updatedAt: string;
   createdAt: string;

@@ -19,7 +19,7 @@ import { GlobalData } from './globals/GlobalData'
 
 import { ShippingMethods } from './collections/ShippingMethods'
 
-import { createRazorpayOrder, verifyRazorpayPayment } from './endpoints/payments'
+
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,16 +33,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Categories, Products, Enquiries, Banners, Pages, Testimonials, Orders, ShippingMethods],
   endpoints: [
-    {
-      path: '/payments/create-order',
-      method: 'post',
-      handler: createRazorpayOrder,
-    },
-    {
-      path: '/payments/verify',
-      method: 'post',
-      handler: verifyRazorpayPayment,
-    },
+
   ],
   globals: [GlobalData],
   editor: lexicalEditor(),
