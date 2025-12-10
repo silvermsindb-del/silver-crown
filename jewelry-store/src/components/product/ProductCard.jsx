@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import Image from '@/components/common/Image';
 import { motion } from 'framer-motion';
 import { formatCurrency } from '@/lib/utils';
+import { useWishlist } from '@/context/WishlistContext';
+import { Heart } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
-    // Safely handle images
+    const { toggleWishlist, isInWishlist } = useWishlist();
+    const isWishlisted = isInWishlist(product.id);
     const imageObj = product.images?.[0];
     const imageUrl = imageObj?.cloudinary?.secure_url || imageObj?.url;
 
@@ -56,12 +59,12 @@ const ProductCard = ({ product }) => {
                     <button
                         onClick={(e) => {
                             e.preventDefault();
-                            // Wishlist logic here
+                            toggleWishlist(product);
                         }}
-                        className="absolute top-3 right-3 z-20 p-2 bg-white/80 backdrop-blur rounded-full hover:bg-white text-stone-400 hover:text-red-500 transition-colors shadow-sm opacity-0 group-hover/card:opacity-100 translate-x-2 group-hover/card:translate-x-0 duration-300"
-                        title="Add to Wishlist"
+                        className={`absolute top-3 right-3 z-20 p-2 rounded-full shadow-sm transition-all duration-300 md:opacity-0 group-hover/card:opacity-100 md:translate-x-2 md:group-hover/card:translate-x-0 ${isWishlisted ? 'bg-red-50 text-red-500 opacity-100 translate-x-0' : 'bg-white/80 hover:bg-white text-stone-400 hover:text-red-500'}`}
+                        title={isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5 4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                        <Heart size={16} fill={isWishlisted ? "currentColor" : "none"} />
                     </button>
 
                     {/* Quick View / Add Button Overlay (Desktop) */}

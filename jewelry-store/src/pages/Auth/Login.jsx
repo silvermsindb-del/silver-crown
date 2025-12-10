@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Lock, Mail } from 'lucide-react';
+import { getFriendlyErrorMessage } from '@/lib/utils';
 
 const Login = () => {
     const { login } = useAuth();
@@ -22,7 +23,7 @@ const Login = () => {
             await login(email, password);
             navigate(from, { replace: true });
         } catch (err) {
-            setError(err.message || 'Failed to login');
+            setError(getFriendlyErrorMessage(err));
         } finally {
             setLoading(false);
         }

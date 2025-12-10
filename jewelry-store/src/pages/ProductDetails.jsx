@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getProductById } from '@/services/products';
 import Image from '@/components/common/Image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, ChevronRight, Check } from 'lucide-react';
+import { ShoppingBag, ChevronRight, Check, Share2 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { formatCurrency } from '@/lib/utils';
 
@@ -89,6 +89,24 @@ const ProductDetails = () => {
     const handleAddToCart = () => {
         addToCart(product);
         setShowSuccessModal(true);
+    };
+
+    const handleShare = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: product.name || product.title,
+                    text: `Check out this amazing ${product.name || product.title} from Silver Crown!`,
+                    url: window.location.href,
+                });
+            } catch (error) {
+                console.log('Error sharing:', error);
+            }
+        } else {
+            // Fallback
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied to clipboard!');
+        }
     };
 
     if (isLoading) return <div className="min-h-screen pt-32 text-center text-gray-500">Loading details...</div>;
@@ -273,6 +291,14 @@ const ProductDetails = () => {
                             >
                                 <ShoppingBag size={20} />
                                 <span>{(!product.stock || product.stock <= 0) ? 'Out of Stock' : 'Add to Cart'}</span>
+                            </button>
+
+                            <button
+                                onClick={handleShare}
+                                className="w-full bg-white border border-gray-200 text-gray-900 py-4 font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-gray-50 active:scale-95"
+                            >
+                                <Share2 size={20} />
+                                <span>Share Product</span>
                             </button>
 
                             <p className="text-xs text-center text-gray-400 mt-4 leading-relaxed">

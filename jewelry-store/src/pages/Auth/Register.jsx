@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, User } from 'lucide-react';
+import { getFriendlyErrorMessage } from '@/lib/utils';
 
 const Register = () => {
     const { register } = useAuth();
@@ -26,7 +27,7 @@ const Register = () => {
             await register(email, password, name);
             navigate('/login');
         } catch (err) {
-            setError(err.message || 'Failed to register');
+            setError(getFriendlyErrorMessage(err));
         } finally {
             setLoading(false);
         }

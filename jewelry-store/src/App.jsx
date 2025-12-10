@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './components/layout/Layout';
@@ -9,6 +9,7 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import { WishlistProvider } from './context/WishlistContext';
 import Checkout from './pages/Checkout';
 import OrderDetails from './pages/OrderDetails';
 import Login from './pages/Auth/Login';
@@ -31,35 +32,43 @@ const AppLayout = () => (
 );
 
 function App() {
+  useEffect(() => {
+    const handleContextMenu = (e) => e.preventDefault();
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route element={<AppLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/order/:id" element={<OrderDetails />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/wishlist" element={<Wishlist />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/shipping" element={<Shipping />} />
-                <Route path="/faqs" element={<FAQs />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </CartProvider>
+        <WishlistProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route element={<AppLayout />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/product/:id" element={<ProductDetails />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/order/:id" element={<OrderDetails />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/wishlist" element={<Wishlist />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/shipping" element={<Shipping />} />
+                  <Route path="/faqs" element={<FAQs />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </CartProvider>
+        </WishlistProvider>
       </AuthProvider>
-    </QueryClientProvider>
+    </QueryClientProvider >
   );
 }
 
