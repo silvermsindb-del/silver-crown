@@ -109,7 +109,7 @@ const HeroSlider = ({ banners }) => {
                             <div className="absolute inset-0 bg-black/25" />
                         </div>
                         <div className={clsx(
-                            "absolute inset-0 flex flex-col justify-center px-8 md:px-20",
+                            "absolute inset-0 flex flex-col justify-end pb-20 md:pb-0 md:justify-center px-8 md:px-20",
                             banner.contentPosition === 'left' && "items-start text-left",
                             banner.contentPosition === 'right' && "items-end text-right",
                             (!banner.contentPosition || banner.contentPosition === 'center') && "items-center text-center"
@@ -126,7 +126,7 @@ const HeroSlider = ({ banners }) => {
                                 {banner.buttonText && (
                                     <Link
                                         to={banner.buttonLink || '/shop'}
-                                        className="inline-block bg-white/90 backdrop-blur-sm text-stone-900 px-8 py-3 md:px-8 md:py-3 text-sm md:text-sm font-bold uppercase tracking-widest hover:bg-white transition-colors mt-4 shadow-sm"
+                                        className="inline-block bg-white text-stone-900 px-10 py-4 md:px-8 md:py-3 text-sm font-bold uppercase tracking-[0.2em] hover:bg-stone-100 transition-colors mt-6 md:mt-4 shadow-lg active:scale-95"
                                     >
                                         {banner.buttonText}
                                     </Link>

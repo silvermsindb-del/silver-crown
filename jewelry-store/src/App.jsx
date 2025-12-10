@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
+import ScrollToTop from './components/common/ScrollToTop';
 import Shop from './pages/Shop';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
@@ -35,6 +36,7 @@ function App() {
       <AuthProvider>
         <CartProvider>
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               <Route element={<AppLayout />}>
                 <Route path="/" element={<Home />} />
